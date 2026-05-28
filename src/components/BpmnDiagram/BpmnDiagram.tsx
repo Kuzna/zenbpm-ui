@@ -19,6 +19,7 @@ export const BpmnDiagram = ({
   elementStatistics,
   history = [],
   activeElements = [],
+  activeSubscriptions = [],
   selectedElement,
   onElementClick,
   height,
@@ -50,6 +51,7 @@ export const BpmnDiagram = ({
     elementStatistics,
     history,
     activeElements,
+    activeSubscriptions,
     selectedElement,
     showProgress,
   });

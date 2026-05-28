@@ -94,6 +94,24 @@ export interface ProcessInstanceNode {
   errorSubscriptions: ErrorSubscription[];
   errorSubscriptionsTotalCount: number;
 
+  /**
+   * All active message subscriptions for this node, fetched with a large page size (size: 100,
+   * state: 'active'). Used for diagram badges — independent of the tab's
+   */
+  allActiveMessageSubscriptions: MessageSubscription[];
+
+  /**
+   * All active timer subscriptions for this node, fetched in full (size: -1,
+   * state: 'active'). Used for diagram badges.
+   */
+  allActiveTimerSubscriptions: TimerSubscription[];
+
+  /**
+   * All active error subscriptions for this node, fetched in full (size: -1,
+   * state: 'active'). Used for diagram badges.
+   */
+  allActiveErrorSubscriptions: ErrorSubscription[];
+
   // --- Children ---
   children: ProcessInstanceNode[];
   /** Total child count as reported by the API (may exceed children.length when paginated) */

@@ -146,6 +146,9 @@ function makeNode(
     timerSubscriptionsTotalCount: 0,
     errorSubscriptions: [],
     errorSubscriptionsTotalCount: 0,
+    allActiveMessageSubscriptions: [],
+    allActiveTimerSubscriptions: [],
+    allActiveErrorSubscriptions: [],
     children: [],
     childrenTotalCount: 0,
   };
@@ -226,9 +229,14 @@ async function fetchNodeDatasets(
     getProcessInstanceMessageSubscriptions(key, { state: opts.messageSubscriptionsState ?? "active", page: opts.messageSubscriptionsPage, size: opts.messageSubscriptionsPageSize }),
     getProcessInstanceTimerSubscriptions(key, { state: opts.timerSubscriptionsState ?? "active", page: opts.timerSubscriptionsPage, size: opts.timerSubscriptionsPageSize }),
     getProcessInstanceErrorSubscriptions(key, { state: opts.errorSubscriptionsState ?? "active", page: opts.errorSubscriptionsPage, size: opts.errorSubscriptionsPageSize }),
+    // All-active fetches (large page size, state: 'active') — used for diagram subscription badges,
+    // independent of the tab's pagination/state filter
+    getProcessInstanceMessageSubscriptions(key, { state: 'active', page: 1, size: 100 }),
+    getProcessInstanceTimerSubscriptions(key, { state: 'active', page: 1, size: 100 }),
+    getProcessInstanceErrorSubscriptions(key, { state: 'active', page: 1, size: 100 }),
   ];
 
-  const [jobsResult, activeJobsResult, incidentsResult, unresolvedResult, decisionsResult, historyResult, messageSubsResult, timerSubsResult, errorSubsResult] = await Promise.allSettled(requests);
+  const [jobsResult, activeJobsResult, incidentsResult, unresolvedResult, decisionsResult, historyResult, messageSubsResult, timerSubsResult, errorSubsResult, allMsgSubsResult, allTimerSubsResult, allErrSubsResult] = await Promise.allSettled(requests);
 
   if (jobsResult.status === 'fulfilled' && jobsResult.value) {
     const v = jobsResult.value as Awaited<ReturnType<typeof getProcessInstanceJobs>>;
@@ -279,6 +287,21 @@ async function fetchNodeDatasets(
     const v = errorSubsResult.value as Awaited<ReturnType<typeof getProcessInstanceErrorSubscriptions>>;
     node.errorSubscriptions = (v.items ?? []) as ErrorSubscription[];
     node.errorSubscriptionsTotalCount = v.totalCount ?? 0;
+  }
+
+  if (allMsgSubsResult.status === 'fulfilled' && allMsgSubsResult.value) {
+    const v = allMsgSubsResult.value as Awaited<ReturnType<typeof getProcessInstanceMessageSubscriptions>>;
+    node.allActiveMessageSubscriptions = (v.items ?? []) as MessageSubscription[];
+  }
+
+  if (allTimerSubsResult.status === 'fulfilled' && allTimerSubsResult.value) {
+    const v = allTimerSubsResult.value as Awaited<ReturnType<typeof getProcessInstanceTimerSubscriptions>>;
+    node.allActiveTimerSubscriptions = (v.items ?? []) as TimerSubscription[];
+  }
+
+  if (allErrSubsResult.status === 'fulfilled' && allErrSubsResult.value) {
+    const v = allErrSubsResult.value as Awaited<ReturnType<typeof getProcessInstanceErrorSubscriptions>>;
+    node.allActiveErrorSubscriptions = (v.items ?? []) as ErrorSubscription[];
   }
 
   // Variables are embedded in instance.variables — slice the current page
@@ -430,6 +453,9 @@ export async function fetchInstanceTree(
         node.timerSubscriptionsTotalCount = cached.timerSubscriptionsTotalCount;
         node.errorSubscriptions = cached.errorSubscriptions;
         node.errorSubscriptionsTotalCount = cached.errorSubscriptionsTotalCount;
+        node.allActiveMessageSubscriptions = cached.allActiveMessageSubscriptions ?? [];
+        node.allActiveTimerSubscriptions = cached.allActiveTimerSubscriptions ?? [];
+        node.allActiveErrorSubscriptions = cached.allActiveErrorSubscriptions ?? [];
         return Promise.resolve();
       }
     }

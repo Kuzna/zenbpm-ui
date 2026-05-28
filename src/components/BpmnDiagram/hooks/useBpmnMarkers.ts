@@ -14,6 +14,7 @@ interface UseBpmnMarkersOptions {
   elementStatistics?: ElementStatistics;
   history?: Array<{ elementId: string }>;
   activeElements?: Array<{ elementId: string }>;
+  activeSubscriptions?: Array<{ elementId: string }>;
   selectedElement?: string;
   showProgress?: boolean;
 }
@@ -32,6 +33,7 @@ export function useBpmnMarkers({
   elementStatistics,
   history = [],
   activeElements = [],
+  activeSubscriptions = [],
   selectedElement,
   showProgress = true,
 }: UseBpmnMarkersOptions): void {
@@ -39,6 +41,7 @@ export function useBpmnMarkers({
   const elementStatisticsRef = useRef(elementStatistics);
   const historyRef = useRef(history);
   const activeElementsRef = useRef(activeElements);
+  const activeSubscriptionsRef = useRef(activeSubscriptions);
   const selectedElementRef = useRef(selectedElement);
 
   useEffect(() => {
@@ -52,6 +55,10 @@ export function useBpmnMarkers({
   useEffect(() => {
     activeElementsRef.current = activeElements;
   }, [activeElements]);
+
+  useEffect(() => {
+    activeSubscriptionsRef.current = activeSubscriptions;
+  }, [activeSubscriptions]);
 
   useEffect(() => {
     selectedElementRef.current = selectedElement;
@@ -144,6 +151,41 @@ export function useBpmnMarkers({
     });
   }, [viewerRef, showProgress]);
 
+  // Apply subscription badges for elements that have active subscriptions but no active token
+  const applySubscriptionBadges = useCallback(() => {
+    if (!viewerRef.current || !activeSubscriptionsRef.current?.length) return;
+
+    const overlays = viewerRef.current.get('overlays') as BpmnOverlays;
+    const elementRegistry = viewerRef.current.get('elementRegistry') as BpmnElementRegistry;
+    const stats = elementStatisticsRef.current;
+
+    // Count subscriptions per elementId
+    const countByElement = (activeSubscriptionsRef.current ?? []).reduce<Record<string, number>>(
+      (acc, { elementId }) => {
+        acc[elementId] = (acc[elementId] ?? 0) + 1;
+        return acc;
+      },
+      {}
+    );
+
+    Object.entries(countByElement).forEach(([elementId, count]) => {
+      // Skip elements that already have an active token — the running-badge covers them
+      if (stats && (stats[elementId]?.activeCount ?? 0) > 0) return;
+
+      const element = elementRegistry.get(elementId);
+      if (!element) return;
+
+      try {
+        overlays.add(elementId, 'subscription-count', {
+          position: { bottom: 12, right: 8 },
+          html: `<div class="bpmn-overlay count-badge subscription-badge">${count}</div>`,
+        });
+      } catch (err) {
+        console.warn(`Failed to add subscription badge for element ${elementId}:`, err);
+      }
+    });
+  }, [viewerRef]);
+
   // Apply selected element marker
   const applySelectedElement = useCallback(() => {
     if (!viewerRef.current) return;
@@ -183,7 +225,8 @@ export function useBpmnMarkers({
     applyHistory();
     applyActiveElements();
     applyElementStatistics();
-  }, [elementStatistics, history, activeElements, loading, applyHistory, applyActiveElements, applyElementStatistics, viewerRef]);
+    applySubscriptionBadges();
+  }, [elementStatistics, history, activeElements, activeSubscriptions, loading, applyHistory, applyActiveElements, applyElementStatistics, applySubscriptionBadges, viewerRef]);
 
   // Update selected element highlighting (without re-initializing)
   useEffect(() => {

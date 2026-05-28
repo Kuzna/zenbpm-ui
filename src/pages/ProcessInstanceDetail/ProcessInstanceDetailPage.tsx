@@ -1,4 +1,4 @@
-import {useState, useMemo, useCallback} from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ns } from '@base/i18n';
@@ -202,6 +202,22 @@ export const ProcessInstanceDetailPage = () => {
     [processInstance]
   );
 
+  // Collect all active event subscriptions across the instance tree for diagram badges
+  const activeSubscriptions = useMemo(() => {
+    if (!instanceTree) return [];
+    const queue: typeof instanceTree[] = [instanceTree];
+    const result: { elementId: string }[] = [];
+    while (queue.length > 0) {
+      const node = queue.shift();
+      if (node === undefined) continue;
+      node.allActiveMessageSubscriptions?.forEach((s) => result.push({ elementId: s.elementId }));
+      node.allActiveTimerSubscriptions?.forEach((s) => result.push({ elementId: s.elementId }));
+      node.allActiveErrorSubscriptions?.forEach((s) => result.push({ elementId: s.elementId }));
+      queue.push(...node.children);
+    }
+    return result;
+  }, [instanceTree]);
+
   const activeJobsTotalCount = useMemo(() => {
     if (!instanceTree) return 0;
     const queue: typeof instanceTree[] = [instanceTree];
@@ -263,6 +279,7 @@ export const ProcessInstanceDetailPage = () => {
                 diagramData={processDefinition.bpmnData}
                 history={historyElements}
                 activeElements={activeElements}
+                activeSubscriptions={activeSubscriptions}
                 elementStatistics={elementStatistics}
                 selectedElement={selectedElement}
                 onElementClick={handleElementIdClick}
@@ -362,7 +379,7 @@ export const ProcessInstanceDetailPage = () => {
             label={
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 {t('processInstance:tabs.calledProcesses')}
-                { visibleChildProcessesCount > 0 && (
+                {visibleChildProcessesCount > 0 && (
                   <Chip label={visibleChildProcessesCount} size="small" sx={{ height: 20, fontSize: 'caption.fontSize' }} />
                 )}
               </Box>
