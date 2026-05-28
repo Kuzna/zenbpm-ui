@@ -32,15 +32,18 @@ export const getBpmnContainerStyles = (isInteractive: boolean): SxProps<Theme> =
   '& .running-badge': {
     backgroundColor: themeColors.bpmn.runningBadge,
   },
+  '& .subscription-badge': {
+    backgroundColor: themeColors.bpmn.subscriptionBadge,
+  },
   '& .failed-badge': {
     backgroundColor: themeColors.bpmn.failedBadge,
   },
   // Highlight completed elements (green path)
   '& .element-completed .djs-visual rect, & .element-completed .djs-visual polygon, & .element-completed .djs-visual circle':
-    {
-      stroke: `${themeColors.bpmn.completedStroke} !important`,
-      strokeWidth: '2px !important',
-    },
+  {
+    stroke: `${themeColors.bpmn.completedStroke} !important`,
+    strokeWidth: '2px !important',
+  },
   '& .element-completed .djs-visual path': {
     stroke: `${themeColors.bpmn.completedStroke} !important`,
   },
@@ -55,9 +58,9 @@ export const getBpmnContainerStyles = (isInteractive: boolean): SxProps<Theme> =
   },
   // Highlight selected element - strong border stroke to distinguish from active
   '& .element-selected .djs-visual rect, & .element-selected .djs-visual polygon, & .element-selected .djs-visual circle':
-    {
-      stroke: `${themeColors.bpmn.selectedStroke} !important`,
-    },
+  {
+    stroke: `${themeColors.bpmn.selectedStroke} !important`,
+  },
   '& .element-selected .djs-visual path': {
     stroke: `${themeColors.bpmn.selectedStroke} !important`,
   },

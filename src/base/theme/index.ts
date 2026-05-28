@@ -68,6 +68,7 @@ const colors = {
   bpmn: {
     // Element count badges
     runningBadge: '#10bc69',  // Primary green - matches app theme
+    subscriptionBadge: '#f59e0b',
     failedBadge: '#d32f2f',
     // Completed elements stroke (green path)
     completedStroke: '#4caf50',

@@ -84,6 +84,12 @@ export interface BpmnDiagramProps {
   activeElements?: Array<{ elementId: string }>;
   /** Selected element to highlight (from filter) */
   selectedElement?: string;
+  /**
+   * Active event subscriptions (message, timer, error) for elements with no active token.
+   * Elements in this list that also have an active token badge will be skipped —
+   * the subscription badge is only shown when there is no active token present.
+   */
+  activeSubscriptions?: Array<{ elementId: string }>;
   /** Callback when an element is clicked */
   onElementClick?: (elementId: string) => void;
   /** Height of the diagram container (default: responsive based on screen size) */
