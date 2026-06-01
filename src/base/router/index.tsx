@@ -12,6 +12,7 @@ import { DecisionDesignerPage } from '@pages/DecisionDesigner';
 import { DecisionsPage } from '@pages/Decisions/DecisionsPage';
 import { DecisionDefinitionDetailPage } from '@pages/DecisionDefinitionDetail';
 import { DecisionInstanceDetailPage } from '@pages/DecisionInstanceDetail';
+import { SystemStatusPage } from '@pages/SystemStatus';
 
 
 export const router = createBrowserRouter([
@@ -94,6 +95,10 @@ export const router = createBrowserRouter([
       {
         path: 'designer/decision/:decisionDefinitionKey',
         element: <DecisionDesignerPage />,
+      },
+      {
+        path: 'system-status',
+        element: <SystemStatusPage />,
       },
     ],
   },

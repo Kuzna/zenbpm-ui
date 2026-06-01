@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { ns } from '@base/i18n';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid, Link } from '@mui/material';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import RuleIcon from '@mui/icons-material/Rule';
 import { useQuery } from '@tanstack/react-query';
@@ -12,11 +12,11 @@ import {
   getDecisionInstances,
 } from '@base/openapi';
 import { QuickAccessCard, type QuickAccessCardProps } from './components/QuickAccessCard';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const HomePage = () => {
   const { t } = useTranslation([ns.common]);
 
-  // Fetch statistics for dashboard cards
   const { data: processDefinitions, isLoading: isLoadingDefinitions } = useQuery({
     queryKey: ['processDefinitions', 'count'],
     queryFn: () => getProcessDefinitions({ size: 1, onlyLatest: true }),
@@ -106,6 +106,21 @@ export const HomePage = () => {
           </Grid>
         ))}
       </Grid>
+
+      <Box sx={{ mt: 4 }}>
+        <Link
+          component={RouterLink}
+          to="/system-status"
+          sx={{
+            fontSize: '0.875rem',
+            color: themeColors.textMuted,
+            textDecorationColor: themeColors.textMuted,
+            '&:hover': { color: themeColors.textPrimary },
+          }}
+        >
+          {t('common:systemStatus.link')}
+        </Link>
+      </Box>
     </Box>
   );
 };
