@@ -401,7 +401,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(2), 1),
-    variables: { customerId: 'CUST-001', customerName: 'John Smith', loanAmount: 50000 },
+    inputVariables: { customerId: 'CUST-001', customerName: 'John Smith', loanAmount: 50000 },
     candidateGroups: ['loan-reviewers'],
   },
   {
@@ -413,7 +413,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(3), 1),
-    variables: { customerId: 'CUST-102', customerName: 'Oliver Jones', loanAmount: 35000 },
+    inputVariables: { customerId: 'CUST-102', customerName: 'Oliver Jones', loanAmount: 35000 },
     candidateGroups: ['loan-reviewers'],
   },
   {
@@ -425,7 +425,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(4), 1),
-    variables: { customerId: 'CUST-201', customerName: 'Liam Brown', loanAmount: 45000 },
+    inputVariables: { customerId: 'CUST-201', customerName: 'Liam Brown', loanAmount: 45000 },
     candidateGroups: ['loan-reviewers'],
   },
   {
@@ -437,7 +437,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(2), 1),
-    variables: { customerId: 'CUST-302', customerName: 'Isabella Garcia', loanAmount: 30000 },
+    inputVariables: { customerId: 'CUST-302', customerName: 'Isabella Garcia', loanAmount: 30000 },
     candidateGroups: ['loan-reviewers'],
   },
   {
@@ -449,7 +449,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'failed' as const,
     createdAt: addMinutes(daysAgo(2), 1),
-    variables: { customerId: 'CUST-004', customerName: 'Alice Brown', loanAmount: 15000 },
+    inputVariables: { customerId: 'CUST-004', customerName: 'Alice Brown', loanAmount: 15000 },
     candidateGroups: ['loan-reviewers'],
     errorMessage: 'External credit service unavailable: Connection timeout after 30000ms',
     retries: 0,
@@ -463,7 +463,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'failed' as const,
     createdAt: addMinutes(hoursAgo(5), 1),
-    variables: { customerId: 'CUST-305', customerName: 'Elijah Thomas', loanAmount: 30000 },
+    inputVariables: { customerId: 'CUST-305', customerName: 'Elijah Thomas', loanAmount: 30000 },
     candidateGroups: ['loan-reviewers'],
     errorMessage: 'Document validation failed: Required document "ID_PROOF" is missing',
     retries: 0,
@@ -478,7 +478,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(5), 31),
-    variables: { customerId: 'CUST-002', customerName: 'Jane Doe', loanAmount: 75000 },
+    inputVariables: { customerId: 'CUST-002', customerName: 'Jane Doe', loanAmount: 75000 },
     candidateGroups: ['loan-managers'],
   },
   {
@@ -490,7 +490,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(1), 31),
-    variables: { customerId: 'CUST-101', customerName: 'Emma Watson', loanAmount: 75000 },
+    inputVariables: { customerId: 'CUST-101', customerName: 'Emma Watson', loanAmount: 75000 },
     candidateGroups: ['loan-managers'],
   },
   {
@@ -502,7 +502,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(1), 31),
-    variables: { customerId: 'CUST-301', customerName: 'Noah Davis', loanAmount: 60000 },
+    inputVariables: { customerId: 'CUST-301', customerName: 'Noah Davis', loanAmount: 60000 },
     candidateGroups: ['loan-managers'],
   },
   {
@@ -514,7 +514,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000033',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(4), 31),
-    variables: { customerId: 'CUST-304', customerName: 'Charlotte Anderson', loanAmount: 55000 },
+    inputVariables: { customerId: 'CUST-304', customerName: 'Charlotte Anderson', loanAmount: 55000 },
     candidateGroups: ['loan-managers'],
   },
 ];

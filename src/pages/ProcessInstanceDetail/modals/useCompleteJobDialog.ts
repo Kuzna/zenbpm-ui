@@ -26,7 +26,7 @@ export function useCompleteJobDialog() {
   const openCompleteJobDialog = useCallback(
     (props: OpenCompleteJobDialogProps) => {
       const isUserTaskWithForm =
-        props.job.type === 'user-task-type' && !!props.job.variables?.ZEN_FORM;
+        props.job.type === 'user-task-type' && !!props.job.inputVariables?.ZEN_FORM;
 
       if (isUserTaskWithForm) {
         openFormJobModal({

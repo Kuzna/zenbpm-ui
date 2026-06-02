@@ -17,7 +17,7 @@ export interface MockJob {
   state: 'active' | 'activatable' | 'activated' | 'completed' | 'failed' | 'canceled';
   createdAt: string;
   completedAt?: string;
-  variables: Record<string, unknown>;
+  inputVariables: Record<string, unknown>;
   assignee?: string;
   candidateGroups?: string[];
   candidateUsers?: string[];
@@ -53,7 +53,7 @@ const legacyJobs: MockJob[] = [
     processDefinitionKey: '1997302399374458880',
     state: 'active',
     createdAt: hoursAgo(3),
-    variables: {
+    inputVariables: {
       formKey: 'loan-approval-form',
       customerId: 'CUST-002',
       customerName: 'Jane Doe',
@@ -74,7 +74,7 @@ const legacyJobs: MockJob[] = [
     state: 'completed',
     createdAt: hoursAgo(26),
     completedAt: hoursAgo(25),
-    variables: {
+    inputVariables: {
       creditScore: 820,
       creditReport: 'excellent',
     },
@@ -90,7 +90,7 @@ const legacyJobs: MockJob[] = [
     processDefinitionKey: '1997302353098702848',
     state: 'active',
     createdAt: hoursAgo(3),
-    variables: {
+    inputVariables: {
       employeeId: 'EMP-001',
       employeeName: 'Sarah Johnson',
       requestType: 'vacation',
@@ -108,7 +108,7 @@ const legacyJobs: MockJob[] = [
     processDefinitionKey: '1997302353098702848',
     state: 'active',
     createdAt: hoursAgo(6),
-    variables: {
+    inputVariables: {
       employeeId: 'EMP-002',
       employeeName: 'Mike Davis',
       requestType: 'equipment',
@@ -129,7 +129,7 @@ const legacyJobs: MockJob[] = [
     processDefinitionKey: '1997302186542891008',
     state: 'failed',
     createdAt: hoursAgo(1),
-    variables: {
+    inputVariables: {
       customerId: 'NEW-001',
       customerName: 'Tech Corp Inc.',
     },
@@ -147,7 +147,7 @@ const legacyJobs: MockJob[] = [
     processDefinitionKey: '1997302376817491968',
     state: 'active',
     createdAt: hoursAgo(4),
-    variables: {
+    inputVariables: {
       orderId: 'ORD-2024-001',
       orderTotal: 299.99,
     },

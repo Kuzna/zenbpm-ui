@@ -379,7 +379,7 @@ export const processInstanceHandlers = [
         state: job.state,
         createdAt: job.createdAt,
         completedAt: job.completedAt,
-        variables: job.variables,
+        inputVariables: job.inputVariables,
       }));
 
       return HttpResponse.json({

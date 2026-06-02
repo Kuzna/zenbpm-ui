@@ -259,7 +259,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000046',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(1), 1),
-    variables: { customerId: 'NEW-001', customerName: 'Tech Corp Inc.' },
+    inputVariables: { customerId: 'NEW-001', customerName: 'Tech Corp Inc.' },
     retries: 3,
   },
   {
@@ -271,7 +271,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000046',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(2), 1),
-    variables: { customerId: 'NEW-101', customerName: 'Global Services Ltd.' },
+    inputVariables: { customerId: 'NEW-101', customerName: 'Global Services Ltd.' },
     retries: 3,
   },
   {
@@ -283,7 +283,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000046',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(6), 1),
-    variables: { customerId: 'NEW-201', customerName: 'Healthcare Plus' },
+    inputVariables: { customerId: 'NEW-201', customerName: 'Healthcare Plus' },
     retries: 3,
   },
   {
@@ -295,7 +295,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000046',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(1), 1),
-    variables: { customerId: 'NEW-301', customerName: 'Acme Corporation' },
+    inputVariables: { customerId: 'NEW-301', customerName: 'Acme Corporation' },
     retries: 3,
   },
   {
@@ -307,7 +307,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000046',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(2), 1),
-    variables: { customerId: 'NEW-302', customerName: 'Beta Industries' },
+    inputVariables: { customerId: 'NEW-302', customerName: 'Beta Industries' },
     retries: 3,
   },
   {
@@ -319,7 +319,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000046',
     state: 'failed' as const,
     createdAt: addMinutes(daysAgo(2), 1),
-    variables: { customerId: 'NEW-305', customerName: 'Epsilon Tech' },
+    inputVariables: { customerId: 'NEW-305', customerName: 'Epsilon Tech' },
     retries: 0,
     errorMessage: 'Failed to connect to external CRM system: Connection timeout after 30s',
   },
