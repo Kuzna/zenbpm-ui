@@ -1,12 +1,11 @@
 import { defineConfig } from 'orval';
-import transformer from './scripts/openapi-transformer';
+import transformer from './scripts/openapi-transformer.js';
 
 export default defineConfig({
   zenbpm: {
     input: {
       target: './openapi/api.yaml',
-      // Transform int64 fields to string types for precision safety
-      // JavaScript's Number loses precision for integers > 2^53-1
+
       override: {
         transformer,
       },
@@ -16,6 +15,7 @@ export default defineConfig({
       target: './src/base/openapi/generated-api',
       schemas: './src/base/openapi/generated-api/schemas',
       client: 'react-query',
+      httpClient: 'axios',
       override: {
         mutator: {
           path: './src/base/openapi/axios-instance.ts',
@@ -23,7 +23,6 @@ export default defineConfig({
         },
         query: {
           useQuery: true,
-          useMutation: true,
         },
       },
     },
