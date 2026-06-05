@@ -13,6 +13,33 @@
       "instances": "Instances"
     }
   },
+  "systemStatus": {
+    "title": "System Status",
+    "description": "Live overview of the ZenBPM engine cluster — nodes, partitions and configuration.",
+    "link": "View system status",
+    "lastUpdated": "Updated at {{time}}",
+    "topology": "Cluster Topology",
+    "clusterConfig": "Cluster Configuration",
+    "nodes": "Nodes",
+    "partitions": "Partitions",
+    "nodePartitionDetails": "Node → Partition Assignment",
+    "desiredPartitions": "Desired Partitions",
+    "activePartitions": "Active Partitions",
+    "totalNodes": "Total Nodes",
+    "activeNodes": "Active Nodes",
+    "raftLeader": "Raft Leader",
+    "nodeId": "Node ID",
+    "address": "Address",
+    "nodeState": "State",
+    "nodeRole": "Role",
+    "suffrage": "Suffrage",
+    "partitionCount": "Partitions",
+    "partitionId": "Partition ID",
+    "partition": "Partition",
+    "leaderId": "Leader ID",
+    "partitionState": "Partition State",
+    "partitionRole": "Role"
+  },
   "yes": "Yes",
   "no": "No",
   "navigation": {
@@ -20,7 +47,8 @@
     "designer": "Designer",
     "design": "Design",
     "decisions": "Decisions",
-    "userTasks": "User Tasks"
+    "userTasks": "User Tasks",
+    "systemStatus": "System Status"
   },
   "actions": {
     "save": "Save",
