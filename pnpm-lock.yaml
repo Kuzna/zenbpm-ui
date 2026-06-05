@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  preact: 10.15.1
+
 importers:
 
   .:
@@ -3556,7 +3559,7 @@ packages:
   preact-markup@2.1.1:
     resolution: {integrity: sha512-8JL2p36mzK8XkspOyhBxUSPjYwMxDM0L5BWBZWxsZMVW8WsGQrYQDgVuDKkRspt2hwrle+Cxr/053hpc9BJwfw==}
     peerDependencies:
-      preact: '>=10'
+      preact: 10.15.1
 
   preact@10.15.1:
     resolution: {integrity: sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g==}
@@ -4446,12 +4449,12 @@ snapshots:
   '@bpmn-io/diagram-js-ui@0.2.3':
     dependencies:
       htm: 3.1.1
-      preact: 10.29.2
+      preact: 10.15.1
 
   '@bpmn-io/diagram-js-ui@0.2.4':
     dependencies:
       htm: 3.1.1
-      preact: 10.29.2
+      preact: 10.15.1
 
   '@bpmn-io/dmn-variable-resolver@0.7.0': {}
 
@@ -4543,7 +4546,7 @@ snapshots:
       downloadjs: 1.4.7
       file-drops: 0.7.0
       mitt: 3.0.1
-      preact: 10.29.2
+      preact: 10.15.1
 
   '@bpmn-io/form-js-viewer@1.21.3':
     dependencies:
@@ -4560,7 +4563,7 @@ snapshots:
       luxon: 3.7.2
       marked: 18.0.4
       min-dash: 5.0.0
-      preact: 10.29.2
+      preact: 10.15.1
 
   '@bpmn-io/form-js@1.21.3':
     dependencies:

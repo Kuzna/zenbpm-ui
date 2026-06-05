@@ -83,5 +83,10 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "pnpm": {
+    "overrides": {
+      "preact": "10.15.1"
+    }
   }
 }
