@@ -99,7 +99,9 @@ export function useDmnViewer({
         }, 200);
 
         // Store interval for cleanup
-        (viewerRef.current as unknown as { _viewCheckInterval?: ReturnType<typeof setInterval> })?._viewCheckInterval = viewCheckInterval;
+        if (viewerRef.current) {
+          (viewerRef.current as unknown as { _viewCheckInterval?: ReturnType<typeof setInterval> })._viewCheckInterval = viewCheckInterval;
+        }
 
         setLoading(false);
         setError(null);
