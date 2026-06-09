@@ -1,1 +1,0 @@
-export { JsonFormPropertiesProviderModule } from './JsonFormPropertiesProvider';
