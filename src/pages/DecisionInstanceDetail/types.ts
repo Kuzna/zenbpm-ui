@@ -18,8 +18,4 @@ export interface EvaluatedDecisionExtended extends EvaluatedDecision {
   }>;
 }
 
-export interface OverlayDialogData {
-  decisionId: string;
-  inputs: Array<{ name: string; value: unknown }>;
-  outputs: Array<{ name: string; value: unknown }>;
-}
+

@@ -59,14 +59,14 @@ export const CompleteFormJobDialog = ({
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState(false);
 
-  const schema = useMemo(() => parseFormSchema(job.variables?.ZEN_FORM), [job.variables]);
+  const schema = useMemo(() => parseFormSchema(job.inputVariables?.ZEN_FORM), [job.inputVariables]);
 
   // Initial data: all job variables except ZEN_FORM itself
   const initialData = useMemo(() => {
-    if (!job.variables) return {};
-    const { ZEN_FORM: _, ...rest } = job.variables;
+    if (!job.inputVariables) return {};
+    const { ZEN_FORM: _, ...rest } = job.inputVariables;
     return rest;
-  }, [job.variables]);
+  }, [job.inputVariables]);
 
   const handleFormSubmit = useCallback(
     async (data: Record<string, unknown>, errors: Record<string, unknown>) => {

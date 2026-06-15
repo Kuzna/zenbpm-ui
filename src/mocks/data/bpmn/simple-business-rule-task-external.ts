@@ -118,7 +118,7 @@ export const jobs = [
     processDefinitionKey: '3000000000000000036',
     state: 'active' as const,
     createdAt: addMinutes(hoursAgo(2), 1),
-    variables: { customerType: 'premium', orderAmount: 5000 },
+    inputVariables: { customerType: 'premium', orderAmount: 5000 },
     retries: 1,
   },
 ];

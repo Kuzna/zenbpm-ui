@@ -48,7 +48,7 @@ export const jobHandlers = [
         candidateGroups: job.candidateGroups,
         createdAt: job.createdAt,
         completedAt: job.completedAt,
-        variables: job.variables,
+        inputVariables: job.inputVariables,
         errorMessage: job.errorMessage,
       }));
 
