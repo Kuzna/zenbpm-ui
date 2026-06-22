@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import CamundaCloudModeler from 'camunda-bpmn-js/lib/camunda-cloud/Modeler';
 import type { BpmnCanvas, BpmnEventBus } from '../types';
-import { emptyDiagram } from '../utils.ts';
+import { emptyDiagram, denormalizeZenbpmXml } from '../utils.ts';
 import { JsonFormPropertiesProviderModule } from '../extensions';
 
 interface UseBpmnEditorOptions {
@@ -48,7 +48,7 @@ export function useBpmnEditor({
     setLoading(true);
     setError(null);
     try {
-      await modelerRef.current.importXML(xml);
+      await modelerRef.current.importXML(denormalizeZenbpmXml(xml));
       const canvas = modelerRef.current.get('canvas') as BpmnCanvas;
       canvas.zoom('fit-viewport');
       setLoading(false);
@@ -206,7 +206,7 @@ export function useBpmnEditor({
 
       // Load initial diagram
       try {
-        const xmlToLoad = initialXml || emptyDiagram();
+        const xmlToLoad = denormalizeZenbpmXml(initialXml || emptyDiagram());
         await modeler.importXML(xmlToLoad);
         initialXmlLoadedRef.current = true;
 
@@ -245,7 +245,7 @@ export function useBpmnEditor({
       if (!modelerRef.current) return;
       setLoading(true);
       try {
-        const xmlToLoad = initialXml || emptyDiagram();
+        const xmlToLoad = denormalizeZenbpmXml(initialXml || emptyDiagram());
         await modelerRef.current.importXML(xmlToLoad);
         const canvas = modelerRef.current.get('canvas') as BpmnCanvas;
         canvas.zoom('fit-viewport');

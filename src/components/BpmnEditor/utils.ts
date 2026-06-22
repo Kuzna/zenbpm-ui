@@ -1,5 +1,21 @@
 // Default empty BPMN diagram with Zeebe/Camunda 8 extensions
 
+const ZEEBE_NAMESPACE_URI = 'xmlns:zeebe="http://camunda.org/schema/zeebe/1.0"';
+const ZENBPM_NAMESPACE_URI = 'xmlns:zenbpm="http://zenbpm.pbinitiative.org/1.0"';
+
+/**
+ * Reverse of `normalizeZeebeXml`: rewrites the ZenBPM-native `zenbpm` namespace
+ * declaration and `<zenbpm:...>` tags to the `zeebe` equivalents so XML stored
+ * on the backend can be opened in the `camunda-bpmn-js` modeler, which only
+ * understands the `zeebe` namespace. No-op when the input already uses `zeebe`.
+ */
+export function denormalizeZenbpmXml(xml: string): string {
+  return xml
+    .replace(new RegExp(ZENBPM_NAMESPACE_URI, 'g'), ZEEBE_NAMESPACE_URI)
+    .replace(new RegExp("<zenbpm:", 'g'), "<zeebe:")
+    .replace(new RegExp("</zenbpm:", 'g'), "</zeebe:");
+}
+
 export const emptyDiagram = () => {
     const processId = `Process_${randomId()}`;
     return `<?xml version="1.0" encoding="UTF-8"?>
