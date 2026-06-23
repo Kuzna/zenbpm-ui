@@ -9,7 +9,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/Kuzna/zenbpm-ui
+  IMAGE_NAME: ghcr.io/kuzna/zenbpm-ui
 
 jobs:
   release:
